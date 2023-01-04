@@ -23,7 +23,6 @@ const storage = multer.diskStorage({ // where to store the images
 const upload = multer({storage});
 // Routes router 
 import globalErrorHandler from "./middleware/globalErrorHandler.js";
-
 import registerRouter from "./routes/registerRoute.js";
 import loginRouter from "./routes/loginRoute.js";
 import mealRouter from "./routes/mealRoute.js";

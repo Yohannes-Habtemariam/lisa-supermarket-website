@@ -10,28 +10,30 @@ const Contact = () => {
   const [messages, setMessages] = useState([]);
 
   //================================
-  // Function to fetch testimonies 
+  // Function to fetch testimonies
   //================================
 
   useEffect(() => {
     const fetchCustomerTestimonies = async () => {
-        const response = await fetch(process.env.REACT_APP_SERVER_URL + "/comments");
-        const result = await response.json();
-        try {
-          if(response.ok) {
-            setMessages(result.data);
-          } else {
-            throw new Error(result.message)
-          }
-        } catch (error) {
-        console.log(error);
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/comments"
+      );
+      const result = await response.json();
+      try {
+        if (response.ok) {
+          setMessages(result.data);
+        } else {
+          throw new Error(result.message);
         }
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchCustomerTestimonies();
-  } , []);
+  }, []);
 
   //================================
-  // Update form input data 
+  // Update form input data
   //================================
   const updateUserData = (event) => {
     switch (event.target.name) {
@@ -56,27 +58,30 @@ const Contact = () => {
   };
 
   //==========================================
-  // Submit Customers Testimonies or Comments 
+  // Submit Customers Testimonies or Comments
   //==========================================
   const submitUserComment = async (event) => {
     event.preventDefault();
 
     const settings = {
       method: "POST",
-      body: new FormData(event.target) // formData, json data, graph ql => Data types
-    }
+      body: new FormData(event.target), // formData, json data, graph ql => Data types
+    };
 
-    const response = await fetch(process.env.REACT_APP_SERVER_URL + "/comments", settings );
+    const response = await fetch(
+      process.env.REACT_APP_SERVER_URL + "/comments",
+      settings
+    );
     const result = await response.json();
     try {
       if (result.success) {
         setMessages([...messages, result.data]);
         // reset
-        setFirstName("")
-        setLastName("")
-        setEmail("")
-        setImage("")
-        setMessage("")
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setImage("");
+        setMessage("");
       } else {
         throw new Error(result.message);
       }
@@ -93,7 +98,11 @@ const Contact = () => {
       <fieldset>
         <legend> We'd Love to Hear From You</legend>
 
-        <form onSubmit={submitUserComment} encType="multipart/form-data" className="contact-form">
+        <form
+          onSubmit={submitUserComment}
+          encType="multipart/form-data"
+          className="contact-form"
+        >
           <div className="user-info">
             <div className="label-and-input-container">
               <div className="label-container">
@@ -170,25 +179,24 @@ const Contact = () => {
           </div>
           <button>Submit</button>
         </form>
-        
       </fieldset>
 
       {/* Customers Testimonies or Comments Section */}
-      
+
       <section className="customer-comments-container">
-      <h2> Customer testimonies </h2>
+        <h2> Customer testimonies </h2>
         <div className="customer-report-container">
-          {
-            messages.map(message => {
-                return (
-                    <div className="specific-customer-comment-container">
-                    <div className="image"> <img src={message.image} alt="Dishes" /></div>
-                  {/* <div className="image"> <iframe src={message.image} frameborder="0" width="900" height="1200"></iframe> </div> */}
-                    <p className="comment"> {message.message} </p>
-                </div> 
-                )
-            })
-          }
+          {messages.map((message) => {
+            return (
+              <div className="specific-customer-comment-container">
+                <div className="image">
+                  <img src={message.image} alt="Dishes" />
+                </div>
+                {/* <div className="image"> <iframe src={message.image} frameborder="0" width="900" height="1200"></iframe> </div> */}
+                <p className="comment"> {message.message} </p>
+              </div>
+            );
+          })}
         </div>
       </section>
     </section>

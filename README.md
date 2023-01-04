@@ -1,1 +1,3 @@
 # lisa-supermarket-website
+
+STRIPE_PRIVATE_KEY=sk_test_51LaEKUFFbaSpzWqspGeOrP9YeK5DMhVFIjcQXRJRKqyqAyjnBV3aptWeAgT5yHjYt0aQaibgmb4ahIiT8Du1kQV200H5zP8Uga

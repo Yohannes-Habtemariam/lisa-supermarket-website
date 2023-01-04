@@ -270,6 +270,9 @@ const CartPage = () => {
                 )}
             </div>
 
+
+            
+
             <div>
               {sameAddress && (
                 <div>
